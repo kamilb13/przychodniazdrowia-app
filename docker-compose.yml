@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  db:
+    container_name: postgres_container
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: przychodnia_db
+    ports:
+      - "5433:5432"
+    networks:
+      - przychodnia_network
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - przychodnia_network
+networks:
+  przychodnia_network:
+    driver: bridge
