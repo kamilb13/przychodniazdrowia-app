@@ -23,5 +23,4 @@ public class Doctor {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-
 }
