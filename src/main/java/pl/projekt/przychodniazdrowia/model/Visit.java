@@ -9,18 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "doctors")
-public class Doctor {
-
+@Table(name = "visit")
+public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "surname", nullable = false)
-    private String surname;
-
+    @ManyToOne
+    @JoinColumn(name = "healthRecord")
+    private HealthRecord healthRecord;
 }
