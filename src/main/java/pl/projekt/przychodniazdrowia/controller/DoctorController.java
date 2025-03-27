@@ -1,5 +1,6 @@
 package pl.projekt.przychodniazdrowia.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import pl.projekt.przychodniazdrowia.respository.DoctorRepository;
 
 import java.util.List;
 
+@Tag(name = "Dodanie lekarza do systemu", description = "")
 @RestController
 public class DoctorController {
     private final DoctorRepository doctorRepository;
