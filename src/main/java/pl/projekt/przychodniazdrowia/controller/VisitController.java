@@ -1,5 +1,6 @@
 package pl.projekt.przychodniazdrowia.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import pl.projekt.przychodniazdrowia.dto.request.VisitRequest;
 import pl.projekt.przychodniazdrowia.dto.response.VisitResponse;
 import pl.projekt.przychodniazdrowia.service.VisitService;
 
+@Tag(name = "Umawianie pacjentów na wizyty", description = "")
 @RestController
 public class VisitController {
 

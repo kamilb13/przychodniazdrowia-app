@@ -1,6 +1,7 @@
 package pl.projekt.przychodniazdrowia.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,8 @@ public class Patient {
     private String surname;
 
     @Column(name = "ssn", unique = true, nullable = false)
-    @Size(min = 11)
+    @Size(min = 11, max = 11, message = "SSN musi mieć dokładnie 11 znaków")
+    @Pattern(regexp = "\\d{11}", message = "SSN może zawierać tylko cyfry")
     private String ssn;
 
 }
