@@ -2,34 +2,40 @@ package pl.projekt.przychodniazdrowia.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.projekt.przychodniazdrowia.dto.response.RegistrationPatientResponse;
 import pl.projekt.przychodniazdrowia.model.HealthRecord;
 import pl.projekt.przychodniazdrowia.model.Patient;
 import pl.projekt.przychodniazdrowia.model.Visit;
 import pl.projekt.przychodniazdrowia.respository.HealthRecordRepository;
 import pl.projekt.przychodniazdrowia.respository.PatientRepository;
+import pl.projekt.przychodniazdrowia.service.PatientRegistrationService;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Tag(name = "Rejestracja pacjenta", description = "Rejestracja pacjenta w przychodni + założenie mu karty zdrowia")
 @RestController
 public class PatientRegistrationController {
     private final HealthRecordRepository healthRecordRepository;
     private final PatientRepository patientRepository;
+    private final PatientRegistrationService patientRegistrationService;
 
-    public PatientRegistrationController(HealthRecordRepository healthRecordRepository, PatientRepository patientRepository) {
+    public PatientRegistrationController(HealthRecordRepository healthRecordRepository, PatientRepository patientRepository, PatientRegistrationService patientRegistrationService) {
         this.healthRecordRepository = healthRecordRepository;
         this.patientRepository = patientRepository;
+        this.patientRegistrationService = patientRegistrationService;
     }
 
     @PostMapping("/register-patient")
-    public HealthRecord registerPatient(@RequestBody @Valid Patient patient) {
-        Patient patientNew = patientRepository.save(patient);
-        HealthRecord healthRecord = new HealthRecord(patientNew, new ArrayList<Visit>());
-        return healthRecordRepository.save(healthRecord);
+    public ResponseEntity<?> registerPatient(@RequestBody @Valid Patient patient) {
+        try {
+            RegistrationPatientResponse registrationPatientResponse = patientRegistrationService.registerPatient(patient);
+            return ResponseEntity.status(HttpStatus.CREATED).body(registrationPatientResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/get-healthRecord/{id}")
