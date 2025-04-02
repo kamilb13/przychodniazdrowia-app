@@ -15,6 +15,7 @@ import pl.projekt.przychodniazdrowia.service.PatientRegistrationService;
 
 import java.util.ArrayList;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Rejestracja pacjenta", description = "Rejestracja pacjenta w przychodni + założenie mu karty zdrowia")
 @RestController
 public class PatientRegistrationController {
