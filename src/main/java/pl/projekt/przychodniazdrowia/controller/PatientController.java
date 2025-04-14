@@ -16,20 +16,20 @@ import java.util.List;
 @RestController
 public class PatientController {
     private final PatientRepository patientRepository;
-    private final HealthRecordRepository healthRecordRepository;
+//    private final HealthRecordRepository healthRecordRepository;
 
     @Autowired
     public PatientController(PatientRepository patientRepository, HealthRecordRepository healthRecordRepository) {
         this.patientRepository = patientRepository;
-        this.healthRecordRepository = healthRecordRepository;
+//        this.healthRecordRepository = healthRecordRepository;
     }
     // Useless!!!!!
     // TODO dodanie pacjenta = dodanie karty pacjenta [-]
     @PostMapping("/add-patient")
     public Patient addPatient(@RequestBody Patient patient) {
         //TODO przeniesc do serwisu
-        HealthRecord hr = new HealthRecord(patient, new ArrayList<>());
-        healthRecordRepository.save(hr);
+//        HealthRecord hr = new HealthRecord(patient, new ArrayList<>());
+//        healthRecordRepository.save(hr);
         return patientRepository.save(patient);
     }
 
