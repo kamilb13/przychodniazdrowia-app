@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.projekt.przychodniazdrowia.dto.request.DoctorRequest;
 import pl.projekt.przychodniazdrowia.dto.response.DoctorResponse;
 import pl.projekt.przychodniazdrowia.service.DoctorService;
-
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Dodanie lekarza do systemu", description = "")
 @RestController
 public class DoctorController {
