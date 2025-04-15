@@ -23,4 +23,8 @@ public class Doctor {
     @Column(name = "surname", nullable = false)
     private String surname;
 
+    public Doctor(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }

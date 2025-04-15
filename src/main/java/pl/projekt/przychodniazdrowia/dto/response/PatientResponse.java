@@ -12,9 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PatientResponse{
     @JsonProperty("patient_name")
-    private String patientName;
+    private String name;
     @JsonProperty("patient_surname")
-    private String patientSurname;
+    private String surname;
     @JsonProperty("patient_ssn")
-    private String patientSsn;
+    private String ssn;
 }

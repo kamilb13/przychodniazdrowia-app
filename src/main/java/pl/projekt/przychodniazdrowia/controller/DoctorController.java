@@ -1,33 +1,54 @@
 package pl.projekt.przychodniazdrowia.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import pl.projekt.przychodniazdrowia.model.Doctor;
-import pl.projekt.przychodniazdrowia.model.Patient;
-import pl.projekt.przychodniazdrowia.respository.DoctorRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import pl.projekt.przychodniazdrowia.dto.request.DoctorRequest;
+import pl.projekt.przychodniazdrowia.dto.response.DoctorResponse;
+import pl.projekt.przychodniazdrowia.service.DoctorService;
 
 import java.util.List;
 
 @Tag(name = "Dodanie lekarza do systemu", description = "")
 @RestController
 public class DoctorController {
-    private final DoctorRepository doctorRepository;
+    private final DoctorService doctorService;
 
     @Autowired
-    public DoctorController(DoctorRepository doctorRepository) {
-        this.doctorRepository = doctorRepository;
+    public DoctorController(DoctorService doctorService) {
+        this.doctorService = doctorService;
     }
+
     @PostMapping("/doctors")
-    public Doctor addPatient(@RequestBody Doctor doctor) {
-        return doctorRepository.save(doctor);
+    public ResponseEntity<?> addDoctor(@RequestBody @Valid DoctorRequest doctorRequest) {
+        try {
+            DoctorResponse doctorResponse = doctorService.addDoctor(doctorRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).body(doctorResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/doctors/{id}")
+    public ResponseEntity<?> getDoctor(@PathVariable Long id) {
+        try {
+            DoctorResponse doctorResponse = doctorService.getDoctor(id);
+            return ResponseEntity.status(HttpStatus.OK).body(doctorResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/doctors")
-    public List<Doctor> getAllDoctors(){
-        return doctorRepository.findAll();
+    public ResponseEntity<?> getAllDoctors(){
+        try {
+            List<DoctorResponse> doctors = doctorService.getDoctors();
+            return ResponseEntity.status(HttpStatus.OK).body(doctors);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

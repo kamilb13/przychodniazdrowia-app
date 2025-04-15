@@ -11,8 +11,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorResponse{
+    @JsonProperty("doctor_id")
+    private Long id;
     @JsonProperty("doctor_name")
-    private String doctorName;
+    private String name;
     @JsonProperty("doctor_surname")
-    private String doctorSurname;
+    private String surname;
+
+    public DoctorResponse(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }
