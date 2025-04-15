@@ -21,12 +21,12 @@ public class DoctorController {
     public DoctorController(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
-    @PostMapping("/add-doctor")
+    @PostMapping("/doctors")
     public Doctor addPatient(@RequestBody Doctor doctor) {
         return doctorRepository.save(doctor);
     }
 
-    @GetMapping("/get-all-doctors")
+    @GetMapping("/doctors")
     public List<Doctor> getAllDoctors(){
         return doctorRepository.findAll();
     }

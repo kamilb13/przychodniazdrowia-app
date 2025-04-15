@@ -29,7 +29,7 @@ public class PatientRegistrationController {
         this.patientRegistrationService = patientRegistrationService;
     }
 
-    @PostMapping("/register-patient")
+    @PostMapping("/patients")
     public ResponseEntity<?> registerPatient(@RequestBody @Valid Patient patient) {
         try {
             RegistrationPatientResponse registrationPatientResponse = patientRegistrationService.registerPatient(patient);
@@ -39,7 +39,7 @@ public class PatientRegistrationController {
         }
     }
 
-    @GetMapping("/get-healthRecord/{id}")
+    @GetMapping("/health-records/{id}")
     public ResponseEntity<HealthRecord> getHealthRecord(@PathVariable Long id) {
         return healthRecordRepository.findById(id)
                 .map(ResponseEntity::ok)

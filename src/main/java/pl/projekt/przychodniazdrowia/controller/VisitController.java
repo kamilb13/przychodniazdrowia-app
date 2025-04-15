@@ -21,7 +21,7 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @PostMapping("/add-visit")
+    @PostMapping("/visits")
     public ResponseEntity<?> addVisit(@RequestBody @Valid VisitRequest request){
         try {
             VisitResponse visitResponse = visitService.addVisit(request.getPatientId(), request.getDoctorId());
