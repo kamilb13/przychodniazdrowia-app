@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.projekt.przychodniazdrowia.dto.response.RegistrationPatientResponse;
 import pl.projekt.przychodniazdrowia.model.HealthRecord;
 import pl.projekt.przychodniazdrowia.model.Patient;
-import pl.projekt.przychodniazdrowia.model.Visit;
 import pl.projekt.przychodniazdrowia.respository.HealthRecordRepository;
 import pl.projekt.przychodniazdrowia.respository.PatientRepository;
 import pl.projekt.przychodniazdrowia.service.PatientRegistrationService;
-
-import java.util.ArrayList;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Rejestracja pacjenta", description = "Rejestracja pacjenta w przychodni + założenie mu karty zdrowia")

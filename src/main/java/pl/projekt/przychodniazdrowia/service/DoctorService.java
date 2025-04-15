@@ -1,6 +1,7 @@
 package pl.projekt.przychodniazdrowia.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.projekt.przychodniazdrowia.dto.request.DoctorRequest;
 import pl.projekt.przychodniazdrowia.dto.response.DoctorResponse;
@@ -12,18 +13,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class DoctorService {
     private final DoctorRepository doctorRepository;
+
+    @Autowired
+    public DoctorService(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
 
     public DoctorResponse addDoctor(DoctorRequest doctorRequest) {
         Doctor doctor = new Doctor(
                 doctorRequest.getName(),
                 doctorRequest.getSurname()
         );
-
         doctorRepository.save(doctor);
-
         return new DoctorResponse(
                 doctor.getId(),
                 doctor.getName(),
