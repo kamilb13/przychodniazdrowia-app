@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.projekt.przychodniazdrowia.dto.response.DoctorResponse;
 import pl.projekt.przychodniazdrowia.dto.response.PatientResponse;
 import pl.projekt.przychodniazdrowia.dto.response.VisitResponse;
+import pl.projekt.przychodniazdrowia.mapper.VisitMapper;
 import pl.projekt.przychodniazdrowia.model.Doctor;
 import pl.projekt.przychodniazdrowia.model.HealthRecord;
 import pl.projekt.przychodniazdrowia.model.Patient;
@@ -14,6 +15,8 @@ import pl.projekt.przychodniazdrowia.respository.PatientRepository;
 import pl.projekt.przychodniazdrowia.respository.VisitRepository;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VisitService {
@@ -41,5 +44,18 @@ public class VisitService {
         PatientResponse patientResponse = new PatientResponse(patient.getName(), patient.getSurname(), patient.getSsn());
         DoctorResponse doctorResponse = new DoctorResponse(doctor.getName(), doctor.getSurname());
         return new VisitResponse(newVisit.getId(), newVisit.getVisitDate(), patientResponse, doctorResponse);
+    }
+
+    public VisitResponse getVisit(Long id) {
+        return visitRepository.findById(id)
+                .map(VisitMapper::mapToDto)
+                .orElse(null);
+    }
+
+    public List<VisitResponse> getVisits() {
+        List<Visit> visits = visitRepository.findAll();
+        return visits.stream()
+                .map(VisitMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 }
