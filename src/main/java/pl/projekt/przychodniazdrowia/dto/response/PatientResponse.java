@@ -11,10 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientResponse{
-    @JsonProperty("patient_name")
+    @JsonProperty("name")
     private String name;
-    @JsonProperty("patient_surname")
+    @JsonProperty("surname")
     private String surname;
-    @JsonProperty("patient_ssn")
+    @JsonProperty("ssn")
     private String ssn;
 }

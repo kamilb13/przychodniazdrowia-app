@@ -13,9 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VisitResponse {
-    @JsonProperty("visit_id")
+    @JsonProperty("id")
     private Long id;
-    @JsonProperty("visit_date")
+    @JsonProperty("date")
     private LocalDate date;
     @JsonProperty("patient")
     PatientResponse patient;
