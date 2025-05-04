@@ -26,7 +26,7 @@ public class PatientRegistrationController {
         this.patientRegistrationService = patientRegistrationService;
     }
 
-    @PostMapping("/patients")
+    @PostMapping("/patients/new")
     public ResponseEntity<?> registerPatient(@RequestBody @Valid Patient patient) {
         try {
             RegistrationPatientResponse registrationPatientResponse = patientRegistrationService.registerPatient(patient);

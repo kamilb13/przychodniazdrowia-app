@@ -24,7 +24,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients/{id}")
-    public ResponseEntity<?> getPatient(Long id) {
+    public ResponseEntity<?> getPatient(@PathVariable Long id) {
         try {
             PatientResponse patientResponse = patientService.getPatient(id);
             return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
