@@ -22,7 +22,7 @@ public class PatientController {
         this.patientRepository = patientRepository;
     }
 
-    @GetMapping("/patients")
+    @GetMapping("/get-patients")
     public List<Patient> getPatients(){
         return patientRepository.findAll();
     }
