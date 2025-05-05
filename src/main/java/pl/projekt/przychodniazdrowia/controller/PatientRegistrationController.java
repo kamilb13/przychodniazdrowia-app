@@ -17,12 +17,10 @@ import pl.projekt.przychodniazdrowia.service.PatientRegistrationService;
 @RestController
 public class PatientRegistrationController {
     private final HealthRecordRepository healthRecordRepository;
-    private final PatientRepository patientRepository;
     private final PatientRegistrationService patientRegistrationService;
 
-    public PatientRegistrationController(HealthRecordRepository healthRecordRepository, PatientRepository patientRepository, PatientRegistrationService patientRegistrationService) {
+    public PatientRegistrationController(HealthRecordRepository healthRecordRepository, PatientRegistrationService patientRegistrationService) {
         this.healthRecordRepository = healthRecordRepository;
-        this.patientRepository = patientRepository;
         this.patientRegistrationService = patientRegistrationService;
     }
 
