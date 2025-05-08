@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface HealthRecordRepository extends JpaRepository<HealthRecord, Long> {
     Optional<HealthRecord> findByPatientId(Long patientId);
+
+    void deleteByPatientId(Long id);
 }

@@ -12,7 +12,6 @@ import pl.projekt.przychodniazdrowia.service.PatientService;
 
 import java.util.List;
 
-@Hidden
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class PatientController {
@@ -29,7 +28,7 @@ public class PatientController {
             PatientResponse patientResponse = patientService.getPatient(id);
             return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -39,7 +38,17 @@ public class PatientController {
             List<PatientResponse> patientResponse = patientService.getAllPatients();
             return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/patients/{id}")
+    public ResponseEntity<?> deletePatient(@PathVariable Long id) {
+        try {
+            patientService.deletePatient(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Patient deleted with id:" + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
