@@ -10,7 +10,9 @@ import pl.projekt.przychodniazdrowia.mapper.DoctorMapper;
 import pl.projekt.przychodniazdrowia.model.Doctor;
 import pl.projekt.przychodniazdrowia.respository.DoctorRepository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,9 +38,9 @@ public class DoctorService {
     }
 
     public DoctorResponse getDoctor(Long id) {
-       return doctorRepository.findById(id)
-               .map(DoctorMapper::mapToDto)
-               .orElse(null);
+        return doctorRepository.findById(id)
+                .map(DoctorMapper::mapToDto)
+                .orElse(null);
     }
 
     public List<DoctorResponse> getDoctors() {
@@ -48,7 +50,20 @@ public class DoctorService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteDoctor(Long id){
+    public void deleteDoctor(Long id) {
         doctorRepository.deleteById(id);
+    }
+
+    public DoctorResponse updateDoctor(Long doctorID, DoctorRequest doctorRequest) {
+        Doctor doctorFromDb = doctorRepository.findById(doctorID)
+                .orElseThrow(() -> new IllegalArgumentException("Doctor not found with id: " + doctorID));
+        doctorFromDb.setName(doctorRequest.getName());
+        doctorFromDb.setSurname(doctorRequest.getSurname());
+        doctorRepository.save(doctorFromDb);
+        return new DoctorResponse(
+                doctorFromDb.getId(),
+                doctorFromDb.getName(),
+                doctorFromDb.getSurname()
+        );
     }
 }
