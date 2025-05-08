@@ -11,7 +11,7 @@ import pl.projekt.przychodniazdrowia.service.VisitService;
 
 import java.util.List;
 
-@Tag(name = "Umawianie pacjentów na wizyty", description = "")
+@Tag(name = "Wizyty", description = "")
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class VisitController {

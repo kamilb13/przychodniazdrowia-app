@@ -1,6 +1,7 @@
 package pl.projekt.przychodniazdrowia.controller;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@Tag(name = "Pacjent", description = "")
 public class PatientController {
     private final PatientService patientService;
 

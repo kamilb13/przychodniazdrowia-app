@@ -12,7 +12,7 @@ import pl.projekt.przychodniazdrowia.service.DoctorService;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@Tag(name = "Dodanie lekarza do systemu", description = "")
+@Tag(name = "Lekarz", description = "")
 @RestController
 public class DoctorController {
     private final DoctorService doctorService;
