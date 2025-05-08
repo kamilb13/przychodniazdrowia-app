@@ -68,14 +68,16 @@ public class VisitService {
     public VisitResponse updateVisit(Long id, VisitRequest visitRequest) {
         Visit visitFromDb = visitRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Visit not found with id: " + id));
-        Patient patientFromDb = patientRepository.findById(visitFromDb.getPatient().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Patient not found with id: [" + visitFromDb.getPatient().getId()));
+        Patient patientFromDb = patientRepository.findById(visitRequest.getPatientId())
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found with id: " + visitFromDb.getPatient().getId()));
         HealthRecord healthRecordFromDb = healthRecordRepository.findByPatientId(patientFromDb.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Health record not found for patient id: " + patientFromDb.getId()));
-        
+        Doctor doctorFromDb = doctorRepository.findById(visitRequest.getDoctorId())
+                .orElseThrow(() -> new IllegalArgumentException("Doctor not found for patient id: " + patientFromDb.getId()));
         visitFromDb.setPatient(patientFromDb);
         visitFromDb.setHealthRecord(healthRecordFromDb);
         visitFromDb.setVisitDate(visitRequest.getDate());
+        visitFromDb.setDoctor(doctorFromDb);
         visitRepository.save(visitFromDb);
         return new VisitResponse(
             visitFromDb.getId(),
