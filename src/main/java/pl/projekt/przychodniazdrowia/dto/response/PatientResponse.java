@@ -1,16 +1,16 @@
 package pl.projekt.przychodniazdrowia.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PatientResponse{
+    @JsonProperty("id")
+    private Long id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("surname")

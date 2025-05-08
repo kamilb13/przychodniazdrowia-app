@@ -3,6 +3,7 @@ package pl.projekt.przychodniazdrowia.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.projekt.przychodniazdrowia.dto.request.PatientRequest;
 import pl.projekt.przychodniazdrowia.dto.response.PatientResponse;
 import pl.projekt.przychodniazdrowia.mapper.PatientMapper;
 import pl.projekt.przychodniazdrowia.model.Patient;
@@ -40,5 +41,20 @@ public class PatientService {
     public void deletePatient(Long id) {
         healthRecordRepository.deleteByPatientId(id);
         patientRepository.deleteById(id);
+    }
+
+    public PatientResponse updatePatient(Long id, PatientRequest patientRequest) {
+        Patient patientFromDb = patientRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Patient with id " + id + " not found"));
+        patientFromDb.setName(patientRequest.getName());
+        patientFromDb.setSurname(patientRequest.getSurname());
+        patientFromDb.setSsn(patientRequest.getSsn());
+        patientRepository.save(patientFromDb);
+        return new PatientResponse (
+                patientFromDb.getId(),
+                patientFromDb.getName(),
+                patientFromDb.getSurname(),
+                patientFromDb.getSsn()
+        );
     }
 }
