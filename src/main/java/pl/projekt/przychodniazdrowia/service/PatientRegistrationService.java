@@ -27,7 +27,7 @@ public class PatientRegistrationService {
         HealthRecord healthRecord = new HealthRecord(patientNew, new ArrayList<Visit>());
         healthRecordRepository.save(healthRecord);
         return new RegistrationPatientResponse(
-                new PatientResponse(patientNew.getName(), patient.getSurname(), patientNew.getSsn()),
+                new PatientResponse(patient.getId(), patientNew.getName(), patient.getSurname(), patientNew.getSsn()),
                 new HealthRecordResponse(healthRecord.getPatient().getId(), healthRecord.getVisitList())
         );
     }
