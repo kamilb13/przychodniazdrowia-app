@@ -51,4 +51,14 @@ public class DoctorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/doctors/{id}")
+    public ResponseEntity<?> deleteDoctor(@PathVariable Long id){
+        try {
+            doctorService.deleteDoctor(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Doctor deleted with id:" + id);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

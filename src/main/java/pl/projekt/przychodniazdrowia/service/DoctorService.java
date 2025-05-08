@@ -1,5 +1,6 @@
 package pl.projekt.przychodniazdrowia.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,9 @@ public class DoctorService {
         return doctors.stream()
                 .map(DoctorMapper::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteDoctor(Long id){
+        doctorRepository.deleteById(id);
     }
 }
