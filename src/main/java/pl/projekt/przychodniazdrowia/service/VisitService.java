@@ -41,7 +41,7 @@ public class VisitService {
                 .orElseThrow(() -> new IllegalArgumentException("Health record not found for patient id: " + patientId));
         Visit newVisit = new Visit(healthRecord, patient, doctor, LocalDate.now()); //TODO zmienić w przyszłości date wizyty!!!
         visitRepository.save(newVisit);
-        PatientResponse patientResponse = new PatientResponse(patient.getName(), patient.getSurname(), patient.getSsn());
+        PatientResponse patientResponse = new PatientResponse(patient.getId(), patient.getName(), patient.getSurname(), patient.getSsn());
         DoctorResponse doctorResponse = new DoctorResponse(doctor.getName(), doctor.getSurname());
         return new VisitResponse(newVisit.getId(), newVisit.getVisitDate(), patientResponse, doctorResponse);
     }
