@@ -34,3 +34,5 @@ build/
 
 ### Docker ###
 docker-compose.yaml
+
+application.yaml

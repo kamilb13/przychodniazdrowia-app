@@ -24,6 +24,7 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
+    // TODO fix doctor id 
     public DoctorResponse addDoctor(DoctorRequest doctorRequest) {
         Doctor doctor = new Doctor(
                 doctorRequest.getName(),
@@ -31,7 +32,6 @@ public class DoctorService {
         );
         doctorRepository.save(doctor);
         return new DoctorResponse(
-                doctor.getId(),
                 doctor.getName(),
                 doctor.getSurname()
         );
