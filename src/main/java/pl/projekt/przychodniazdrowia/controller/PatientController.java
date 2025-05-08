@@ -11,6 +11,7 @@ import pl.projekt.przychodniazdrowia.model.Patient;
 import pl.projekt.przychodniazdrowia.respository.PatientRepository;
 import pl.projekt.przychodniazdrowia.service.PatientService;
 
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -48,7 +49,8 @@ public class PatientController {
     public ResponseEntity<?> deletePatient(@PathVariable Long id) {
         try {
             patientService.deletePatient(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Patient deleted with id:" + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Collections.singletonMap("message", "Patient deleted with id: " + id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

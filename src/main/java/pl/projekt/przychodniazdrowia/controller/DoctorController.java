@@ -10,6 +10,8 @@ import pl.projekt.przychodniazdrowia.dto.request.DoctorRequest;
 import pl.projekt.przychodniazdrowia.dto.response.DoctorResponse;
 import pl.projekt.przychodniazdrowia.service.DoctorService;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -57,7 +59,8 @@ public class DoctorController {
     public ResponseEntity<?> deleteDoctor(@PathVariable Long id) {
         try {
             doctorService.deleteDoctor(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Doctor deleted with id:" + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Collections.singletonMap("message", "Doctor deleted with id: " + id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
