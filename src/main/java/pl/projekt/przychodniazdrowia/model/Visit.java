@@ -16,6 +16,7 @@ import java.util.Date;
 public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @ManyToOne
@@ -30,7 +31,7 @@ public class Visit {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    LocalDate visitDate;
+    private LocalDate visitDate;
 
     public Visit(HealthRecord healthRecord, Patient patient, Doctor doctor, LocalDate visitDate) {
         this.healthRecord = healthRecord;

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,4 +23,6 @@ public class VisitRequest {
     @Positive
     @JsonProperty("doctor_id")
     private Long doctorId;
+    @JsonProperty("date")
+    private LocalDate date;
 }

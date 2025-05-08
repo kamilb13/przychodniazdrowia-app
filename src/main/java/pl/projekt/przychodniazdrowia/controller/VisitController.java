@@ -23,32 +23,52 @@ public class VisitController {
     }
 
     @PostMapping("/visits")
-    public ResponseEntity<?> addVisit(@RequestBody @Valid VisitRequest request){
+    public ResponseEntity<?> addVisit(@RequestBody @Valid VisitRequest visitRequest) {
         try {
-            VisitResponse visitResponse = visitService.addVisit(request.getPatientId(), request.getDoctorId());
+            VisitResponse visitResponse = visitService.addVisit(visitRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(visitResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @GetMapping("/visits/{id}")
-    public ResponseEntity<?> getVisit(@PathVariable Long id){
+    public ResponseEntity<?> getVisit(@PathVariable Long id) {
         try {
             VisitResponse visitResponse = visitService.getVisit(id);
             return ResponseEntity.status(HttpStatus.OK).body(visitResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     @GetMapping("/visits")
-    public ResponseEntity<?> getAllVisits(){
+    public ResponseEntity<?> getAllVisits() {
         try {
             List<VisitResponse> visitResponse = visitService.getVisits();
             return ResponseEntity.status(HttpStatus.OK).body(visitResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/visits/{id}")
+    public ResponseEntity<?> deleteVisit(@PathVariable Long id) {
+        try {
+            visitService.deleteVisit(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Visit deleted with id: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/visits/{id}")
+    public ResponseEntity<?> editVisit(@PathVariable Long id, @RequestBody @Valid VisitRequest visitRequest) {
+        try {
+            VisitResponse visitResponse = visitService.updateVisit(id, visitRequest);
+            return ResponseEntity.status(HttpStatus.OK).body(visitResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
