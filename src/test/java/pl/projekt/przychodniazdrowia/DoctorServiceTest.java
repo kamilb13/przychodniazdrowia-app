@@ -69,4 +69,31 @@ class DoctorServiceTest {
         assertEquals(2, doctors.size());
         verify(doctorRepository).findAll();
     }
+    @Test
+    void givenValidIdAndRequest_whenUpdateDoctor_thenReturnUpdatedDoctorResponse() {
+        Long id = 1L;
+        Doctor existingDoctor = new Doctor(id, "OldName", "OldSurname");
+        DoctorRequest update = new DoctorRequest("NewName", "NewSurname");
+
+        when(doctorRepository.findById(id)).thenReturn(Optional.of(existingDoctor));
+        when(doctorRepository.save(any(Doctor.class))).thenReturn(existingDoctor);
+
+        DoctorResponse response = doctorService.updateDoctor(id, update);
+
+        assertEquals("NewName", response.getName());
+        assertEquals("NewSurname", response.getSurname());
+        assertEquals(id, response.getId());
+
+        verify(doctorRepository).findById(id);
+        verify(doctorRepository).save(existingDoctor);
+    }
+    @Test
+    void givenId_whenDeleteDoctor_thenRepositoryDeleteByIdCalled() {
+        Long id = 1L;
+
+        doctorService.deleteDoctor(id);
+
+        verify(doctorRepository).deleteById(id);
+    }
+
 }
