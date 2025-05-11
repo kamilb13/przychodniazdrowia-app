@@ -9,6 +9,7 @@ import pl.projekt.przychodniazdrowia.dto.request.VisitRequest;
 import pl.projekt.przychodniazdrowia.dto.response.VisitResponse;
 import pl.projekt.przychodniazdrowia.service.VisitService;
 
+import java.util.Collections;
 import java.util.List;
 
 @Tag(name = "Wizyty", description = "")
@@ -56,7 +57,7 @@ public class VisitController {
     public ResponseEntity<?> deleteVisit(@PathVariable Long id) {
         try {
             visitService.deleteVisit(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Visit deleted with id: " + id);
+            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("message", "Visit deleted with id: " + id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
