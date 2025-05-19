@@ -11,6 +11,7 @@ import pl.projekt.przychodniazdrowia.model.Doctor;
 import pl.projekt.przychodniazdrowia.model.Patient;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -21,15 +22,18 @@ public class VisitResponse {
     private Long id;
     @JsonProperty("date")
     private LocalDate date;
+    @JsonProperty("time")
+    private LocalTime time;
     @JsonProperty("patient")
     PatientResponse patient;
     @JsonProperty("doctor")
     DoctorResponse doctor;
 
 
-    public VisitResponse(Long id, LocalDate visitDate, Patient patient, Doctor doctor) {
+    public VisitResponse(Long id, LocalDate visitDate, LocalTime visitTime, Patient patient, Doctor doctor) {
         this.id = id;
         this.date = visitDate;
+        this.time = visitTime;
         this.patient = PatientMapper.mapToDto(patient);
         this.doctor = DoctorMapper.mapToDto(doctor);
     }

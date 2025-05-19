@@ -8,6 +8,7 @@ public class VisitMapper {
         return new VisitResponse(
                 visit.getId(),
                 visit.getVisitDate(),
+                visit.getVisitTime(),
                 visit.getPatient(),
                 visit.getDoctor()
         );

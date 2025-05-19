@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -31,11 +33,14 @@ public class Visit {
     private Doctor doctor;
 
     private LocalDate visitDate;
+    
+    private LocalTime visitTime;
 
-    public Visit(HealthRecord healthRecord, Patient patient, Doctor doctor, LocalDate visitDate) {
+    public Visit(HealthRecord healthRecord, Patient patient, Doctor doctor, LocalDate visitDate, LocalTime visitTime) {
         this.healthRecord = healthRecord;
         this.patient = patient;
         this.doctor = doctor;
         this.visitDate = visitDate;
+        this.visitTime = visitTime;
     }
 }

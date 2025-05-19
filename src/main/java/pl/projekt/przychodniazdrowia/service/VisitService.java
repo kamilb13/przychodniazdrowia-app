@@ -40,11 +40,11 @@ public class VisitService {
                 .orElseThrow(() -> new IllegalArgumentException("Patient not found with id: " + visitRequest.getPatientId()));
         HealthRecord healthRecord = healthRecordRepository.findByPatientId(visitRequest.getPatientId())
                 .orElseThrow(() -> new IllegalArgumentException("Health record not found for patient id: " + visitRequest.getPatientId()));
-        Visit newVisit = new Visit(healthRecord, patient, doctor, visitRequest.getDate());
+        Visit newVisit = new Visit(healthRecord, patient, doctor, visitRequest.getDate(), visitRequest.getTime());
         visitRepository.save(newVisit);
         PatientResponse patientResponse = new PatientResponse(patient.getId(), patient.getName(), patient.getSurname(), patient.getSsn());
         DoctorResponse doctorResponse = new DoctorResponse(doctor.getName(), doctor.getSurname());
-        return new VisitResponse(newVisit.getId(), newVisit.getVisitDate(), patientResponse, doctorResponse);
+        return new VisitResponse(newVisit.getId(), newVisit.getVisitDate(), newVisit.getVisitTime(), patientResponse, doctorResponse);
     }
     
     public VisitResponse getVisit(Long id) {
@@ -82,6 +82,7 @@ public class VisitService {
         return new VisitResponse(
             visitFromDb.getId(),
             visitFromDb.getVisitDate(),
+            visitFromDb.getVisitTime(),
             visitFromDb.getPatient(),
             visitFromDb.getDoctor()    
         );
