@@ -27,11 +27,10 @@ class DoctorServiceTest {
     @InjectMocks
     private DoctorService doctorService;
     
-//    TODO needs fixing 
-//    @Test
+    @Test
     void givenDoctorRequest_whenAddDoctor_thenReturnDoctorResponse() {
         DoctorRequest doctorRequest = new DoctorRequest("Jan", "Kowalski");
-        Doctor doctor = new Doctor(1L, doctorRequest.getName(), doctorRequest.getSurname());
+        Doctor doctor = new Doctor(null, doctorRequest.getName(), doctorRequest.getSurname());
 
         when(doctorRepository.save(any(Doctor.class))).thenReturn(doctor);
         DoctorResponse doctorResponse = doctorService.addDoctor(doctorRequest);
